@@ -14,7 +14,7 @@ input.addEventListener('input', (e) => {
 
 
 function fetchCountrys(name) {
-  return fetch(`https://restcountries.com/v2/name/${name}?fields=name,capital,population,flags,languages`).then(
+  return fetch(`https://restcountries.com/v3.1/name/${name}?fields=name,capital,population,flags,languages`).then(
     (response) => {
       if (!response.ok) {
         throw new Error(response.status);
@@ -25,13 +25,14 @@ function fetchCountrys(name) {
 }
 
 function markupCountry(countrys) {
-    console.log(countrys)
+  console.log(countrys)  
+  console.log(Object.values(countrys[0].languages).join(", "));
   const markup = countrys
     .map((country) => {
-      return `<h2><img src=${countrys.flags} alt="flag" width=30px> ${country.name}</h2>
+      return `<h2><img src=${country.flags.svg} alt="flag" width=30px> ${country.name.official}</h2>
           <p>Capital: ${country.capital}</p>
           <p>Population: ${country.population}</p>
-          <p>Languages: ${country.languages}</p>
+          <p>Languages: ${Object.values(country.languages).join(", ")}</p>
         </li>`;
     })
     .join("");
