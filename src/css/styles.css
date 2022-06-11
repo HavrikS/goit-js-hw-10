@@ -17,4 +17,22 @@ body {
   padding: 8px;
   max-width: 320px;
   margin-bottom: 16px;
+  margin-left: 40px;
+}
+
+.list {
+  list-style-type: none;  
+}
+
+
+.list--title {
+  display: flex;
+}
+
+.list--img  {
+  margin-right: 10px;
+}
+
+div {
+  margin-left: 40px;
 }
