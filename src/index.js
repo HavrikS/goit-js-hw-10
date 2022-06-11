@@ -19,32 +19,33 @@ input.addEventListener('input', debounce((e) => {
 
 function markupCountry(countrys) {
   if (countrys.length >= 2 && countrys.length <= 10) {
-    countrys
-      .map((country) => {
-        ulMarkupCountry(country);
-      })
+    ulMarkupCountry(countrys)     
   } else if (countrys.length === 1) {
-    countrys
-      .map((country) => {
-        divMarkupCountry(country);
-      })    
+    divMarkupCountry(countrys)
   } else {
     Notiflix.Notify.info("Too many matches found. Please enter a more specific name.");
   }  
 }
 
-function ulMarkupCountry(country) {  
-  countryList.insertAdjacentHTML('afterbegin', `<li class="list">
-  <h2 class="list--title"><img class="list--img" src=${country.flags.svg} alt="flag" width=30px> ${country.name.official}</h2>
-  </li>`);
+function ulMarkupCountry(countrys) {  
+  const markapUl = countrys
+    .map((country) => {
+      return `<li class="list">
+    <h2 class="list--title"><img class="list--img" src=${country.flags.svg} alt="flag" width=30px> ${country.name.official}</h2>
+    </li>`;
+    }).join("");
+  countryList.innerHTML = markapUl
 }
 
-function divMarkupCountry(country) {
-  countryInfo.insertAdjacentHTML('afterbegin',
-    `<h2 class="list--title"><img class="list--img" src=${country.flags.svg} alt="flag" width=30px> ${country.name.official}</h2>
+function divMarkupCountry(countrys) {
+  const markapDiv = countrys
+    .map((country) => {
+    return `<h2 class="list--title"><img class="list--img" src=${country.flags.svg} alt="flag" width=30px> ${country.name.official}</h2>
     <p><b>Capital: </b> ${country.capital}</p>
     <p><b>Population: </b> ${country.population}</p>
-    <p><b>Languages: </b> ${Object.values(country.languages).join(", ")}</p>`);
+    <p><b>Languages: </b> ${Object.values(country.languages).join(", ")}</p>`;
+    }).join("");
+  countryInfo.innerHTML = markapDiv
 }
 
 function cleanMarkap() {
