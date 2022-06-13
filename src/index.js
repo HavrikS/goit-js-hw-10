@@ -10,10 +10,15 @@ const countryInfo = document.querySelector('.country-info');
 const DEBOUNCE_DELAY = 300;
 
 input.addEventListener('input', debounce((e) => {
-  fetchCountrys(e.target.value.trim())
+  const searchCountrys = e.target.value.trim()
+  if (searchCountrys.length >= 1) {    
+  fetchCountrys(searchCountrys)
     .then((countrys) => markupCountry(countrys))
     .catch(() => Notiflix.Notify.failure("Oops, there is no country with that name"));
   cleanMarkap();
+  };
+  cleanMarkap();
+  return
 }, DEBOUNCE_DELAY));
 
 
@@ -52,4 +57,5 @@ function cleanMarkap() {
   countryList.innerHTML = "";
   countryInfo.innerHTML = "";
 }
+
 
